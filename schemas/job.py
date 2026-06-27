@@ -4,19 +4,18 @@ from typing import Optional
 
 class JobBase(BaseModel):
     title: str
-    salary : int
-    descreption : str
+    salary: int
+    description: str
     company_id: int
+
 class JobCreate(JobBase):
     pass
-    # title: str
-    # salary: int
 
-class JobUpdate(JobBase):
-    title: Optional[str]=None
-    salary: Optional[int]=None
-    description : Optional[str]=None
-    company_id : Optional[int]=None
+class JobUpdate(BaseModel):
+    title: Optional[str] = None
+    salary: Optional[int] = None
+    description: Optional[str] = None
+    company_id: Optional[int] = None
 
 class JobResponse(JobBase):
     id : int
