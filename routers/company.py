@@ -27,10 +27,9 @@ def get_company(company_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Company not found")
     return db_company
 
+
+
 @router.put("/{company_id}", response_model=CompanyResponse)
-
-
-
 def update_company(company_id: int, company: CompanyUpdate, db: Session = Depends(get_db)):
     db_company = db.get(Company, company_id)
     if not db_company:
