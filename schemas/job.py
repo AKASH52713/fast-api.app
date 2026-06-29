@@ -11,7 +11,7 @@ class JobBase(BaseModel):
 class JobCreate(JobBase):
     pass
 
-class JobUpdate(BaseModel):
+class JobUpdate(JobBase):
     title: Optional[str] = None
     salary: Optional[int] = None
     description: Optional[str] = None

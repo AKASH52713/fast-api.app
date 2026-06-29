@@ -16,7 +16,9 @@ def create_company(company: CompanyCreate, db: Session = Depends(get_db)):
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=list[CompanyResponse])
 def get_all_company(db: Session = Depends(get_db)):
-    return db.query(Company).all()
+    compsnies= db.query(Company).all()
+    return compsnies
+
 
 @router.get("/{company_id}", status_code=status.HTTP_200_OK, response_model=CompanyResponse)
 def get_company(company_id: int, db: Session = Depends(get_db)):
@@ -26,6 +28,9 @@ def get_company(company_id: int, db: Session = Depends(get_db)):
     return db_company
 
 @router.put("/{company_id}", response_model=CompanyResponse)
+
+
+
 def update_company(company_id: int, company: CompanyUpdate, db: Session = Depends(get_db)):
     db_company = db.get(Company, company_id)
     if not db_company:

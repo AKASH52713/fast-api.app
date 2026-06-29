@@ -1,5 +1,6 @@
-from fastapi import APIRouter
-from schemas.job import JobCreate,JobUpdate
+from fastapi import APIRouter #, HTTPException, Depends, status
+#from sqlalchemy.orm import Session
+#from schemas.job import JobCreate, JobUpdate, JobResponse
 router= APIRouter(prefix="/job",tags=["job"])
 jobs=[]
 
