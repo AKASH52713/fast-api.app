@@ -1,14 +1,45 @@
 import Welcome from "./components/Welcome";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import CompanyCard from "./components/CompanyCard";
+import JobCard from "./components/JobCard";
+import {useEffect, useState} from "react";
+import { getCompanies } from "./Services/CompanyService";
+import type { Company } from "./types/company";
 function App(){
-  return(
-    <>
-    <NavBar/>
-    <Welcome/>
-    <Footer/>
-    </>
-    
+  const[loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [companies, setCompanies] = useState<Company[]>([]);
+  async function fetchCompanies() {
+    setLoading(true);
+    try {
+      const Companies = await getCompanies();
+      setCompanies(Companies);
+    } catch (error) {
+      setError((error as Error).message);
+
+    } finally{
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  return (
+    <div>
+      <NavBar />
+      <Welcome />
+      <br />
+      <CompanyCard key={companies[0]?.id} />
+      <JobCard />
+      <Footer />
+    </div>
   )
 }
 
