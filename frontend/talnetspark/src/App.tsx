@@ -1,4 +1,4 @@
-import Welcome from "./components/Welcome";
+// import Welcome from "./components/Welcome";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CompanyCard from "./components/CompanyCard";
@@ -34,9 +34,9 @@ function App(){
   return (
     <div>
       <NavBar />
-      <Welcome />
+      {/* <Welcome /> */}
       <br />
-      <CompanyCard key={companies[0]?.id} />
+      <CompanyCard companies={companies} />
       <JobCard />
       <Footer />
     </div>
