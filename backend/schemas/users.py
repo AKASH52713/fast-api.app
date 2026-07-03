@@ -1,23 +1,24 @@
 from pydantic import BaseModel, Field
+from pydantic import ConfigDict
 
 class UserBase(BaseModel):
-    name: str
+    username: str
     email: str
     password: str
-    role: str
+    role: str = "Candidate"
+
+    model_config = ConfigDict(populate_by_name=True)
 
 class UserCreate(UserBase):
     pass
 
 class UserResponse(BaseModel):
     id: int
-    name: str = Field(..., alias="username")
+    username: str
     email: str
     role: str
 
-    class Config:
-        from_attributes = True
-        allow_population_by_field_name = True
+    model_config = ConfigDict(from_attributes=True)
 
 class Login_User(BaseModel):
     email: str
