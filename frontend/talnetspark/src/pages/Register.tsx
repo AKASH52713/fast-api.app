@@ -1,11 +1,13 @@
 import {useState} from "react";
 import {register} from "../Services/AuthService";
+import {login} from "../Services/AuthService";
 
 type Props = {
+    onRegister: (token: string) => void;
     onSwitchToLogin: () => void;
 }
 
-function Register({onSwitchToLogin}: Props){
+function Register({onRegister, onSwitchToLogin}: Props){
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -15,8 +17,9 @@ function Register({onSwitchToLogin}: Props){
         e.preventDefault();
         try {
             await register({name,email,password,role});
-            alert("Registration successful! Please login.");
-            onSwitchToLogin();
+            // Auto-login after successful registration
+            const response = await login({email, password});
+            onRegister(response.access_token);
         } catch (error) {
             console.error("Error during registration:", error);
             alert("Registration failed");
