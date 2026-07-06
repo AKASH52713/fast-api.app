@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sendMessage } from "../Services/chatService";
+import { sendMessage } from "../Services/ChatService";
 
 const Chat = () => {
   const [question, setQuestion] = useState("");
@@ -61,4 +61,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Chat
